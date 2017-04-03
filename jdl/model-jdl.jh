@@ -1,0 +1,21 @@
+entity VideoDocument {
+    documentName String minlength (8) maxlength (200) required
+    sourceFilePath String minlength (10) maxlength (512)
+    documentFilePath String minlength (10) maxlength (512)
+}
+
+entity VideoType {
+    mimeType String minlength(8) maxlength(100) required
+    typeCode String minlength(5) maxlength(30) required 
+}
+
+relationship ManyToOne {
+    VideoDocument {videoType(typeCode)} to VideoType
+}
+
+
+dto all with mapstruct
+
+paginate all with pager
+
+service all with serviceImpl

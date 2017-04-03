@@ -1,0 +1,39 @@
+
+<div *ngIf="videoDocument">
+    <h2><span jhiTranslate="videopocApp.videoDocument.detail.title">Video Document</span> {{videoDocument.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="videopocApp.videoDocument.documentName">Document Name</span></dt>
+        <dd>
+            <span>{{videoDocument.documentName}}</span>
+        </dd>
+        <dt><span jhiTranslate="videopocApp.videoDocument.sourceFilePath">Source File Path</span></dt>
+        <dd>
+            <span>{{videoDocument.sourceFilePath}}</span>
+        </dd>
+        <dt><span jhiTranslate="videopocApp.videoDocument.documentFilePath">Document File Path</span></dt>
+        <dd>
+            <span>{{videoDocument.documentFilePath}}</span>
+        </dd>
+        <dt><span jhiTranslate="videopocApp.videoDocument.videoType">Video Type</span></dt>
+        <dd>
+            <div *ngIf="videoDocument.videoTypeId">
+                <a [routerLink]="['/video-type', videoDocument.videoTypeId]">{{videoDocument.videoTypeTypeCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'video-document/'+ videoDocument.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

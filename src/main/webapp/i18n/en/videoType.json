@@ -1,0 +1,22 @@
+{
+    "videopocApp": {
+        "videoType" : {
+            "home": {
+                "title": "Video Types",
+                "createLabel": "Create a new Video Type",
+                "createOrEditLabel": "Create or edit a Video Type"
+            },
+            "created": "A new Video Type is created with identifier {{ param }}",
+            "updated": "A Video Type is updated with identifier {{ param }}",
+            "deleted": "A Video Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Video Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Video Type"
+            },
+            "mimeType": "Mime Type",
+            "typeCode": "Type Code"
+        }
+    }
+}

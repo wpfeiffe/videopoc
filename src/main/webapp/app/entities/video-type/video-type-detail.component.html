@@ -1,0 +1,29 @@
+
+<div *ngIf="videoType">
+    <h2><span jhiTranslate="videopocApp.videoType.detail.title">Video Type</span> {{videoType.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="videopocApp.videoType.mimeType">Mime Type</span></dt>
+        <dd>
+            <span>{{videoType.mimeType}}</span>
+        </dd>
+        <dt><span jhiTranslate="videopocApp.videoType.typeCode">Type Code</span></dt>
+        <dd>
+            <span>{{videoType.typeCode}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'video-type/'+ videoType.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,67 @@
+<div>
+    <h2>
+        <span jhiTranslate="videopocApp.videoType.home.title">Video Types</span>
+        <button class="btn btn-primary float-right create-video-type" [routerLink]="['/', { outlets: { popup: ['video-type-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="videopocApp.videoType.home.createLabel">
+            Create new Video Type
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="videoTypes">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mimeType"><span jhiTranslate="videopocApp.videoType.mimeType">Mime Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="typeCode"><span jhiTranslate="videopocApp.videoType.typeCode">Type Code</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let videoType of videoTypes ;trackBy: trackId">
+                <td><a [routerLink]="['../video-type', videoType.id ]">{{videoType.id}}</a></td>
+                <td>{{videoType.mimeType}}</td>
+                <td>{{videoType.typeCode}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../video-type', videoType.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'video-type/'+ videoType.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'video-type/'+ videoType.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div *ngIf="videoTypes && videoTypes.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

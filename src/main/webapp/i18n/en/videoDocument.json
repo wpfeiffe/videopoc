@@ -1,0 +1,24 @@
+{
+    "videopocApp": {
+        "videoDocument" : {
+            "home": {
+                "title": "Video Documents",
+                "createLabel": "Create a new Video Document",
+                "createOrEditLabel": "Create or edit a Video Document"
+            },
+            "created": "A new Video Document is created with identifier {{ param }}",
+            "updated": "A Video Document is updated with identifier {{ param }}",
+            "deleted": "A Video Document is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Video Document {{ id }}?"
+            },
+            "detail": {
+                "title": "Video Document"
+            },
+            "documentName": "Document Name",
+            "sourceFilePath": "Source File Path",
+            "documentFilePath": "Document File Path",
+            "videoType": "Video Type"
+        }
+    }
+}

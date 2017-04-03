@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "videoType",
+            "otherEntityName": "videoType",
+            "otherEntityField": "typeCode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "documentName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 8,
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "sourceFilePath",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 10,
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "documentFilePath",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 10,
+            "fieldValidateRulesMaxlength": 512
+        }
+    ],
+    "changelogDate": "20170401184906",
+    "entityTableName": "video_document",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}
