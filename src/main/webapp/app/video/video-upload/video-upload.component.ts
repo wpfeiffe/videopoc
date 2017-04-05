@@ -44,12 +44,12 @@ export class VideoUploadComponent implements OnInit {
       (res: Response) => this.onError(res.json())
     );
 
-    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       this.videoDocumentService.query({}).subscribe(
         (res: Response) => this.onSuccess(res.json(), res.headers),
         (res: Response) => this.onError(res.json())
       );
-    }
+    };
   }
 
   public fileOverBase(e: any): void {

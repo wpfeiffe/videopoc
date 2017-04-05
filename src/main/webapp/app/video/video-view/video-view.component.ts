@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ export class VideoViewComponent implements OnInit {
   videoToView = 0;
   videoFound = false;
   sources: Array<Object>;
+  @ViewChild('videoTest') videoControl: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +22,7 @@ export class VideoViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(value => {
-      console.log('The value is ' + value);
+      console.log(value);
       this.videoToView = value.id;
 
       this.sources = [
@@ -42,5 +43,10 @@ export class VideoViewComponent implements OnInit {
       this.videoFound = true;
 
     });
+  }
+
+  moveVideoToLocation(secondValue) {
+    console.log('The current time is ' + this.videoControl.nativeElement.currentTime);
+    this.videoControl.nativeElement.currentTime = secondValue;
   }
 }

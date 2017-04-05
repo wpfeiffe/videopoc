@@ -25,12 +25,10 @@ public class DocumentController
 {
 
 	private final FileStorage storage;
-	private final JHipsterProperties jHipsterProperties;
 
 	@Autowired
 	public DocumentController(FileStorage storage, JHipsterProperties jHipsterProperties) {
 		this.storage = storage;
-		this.jHipsterProperties = jHipsterProperties;
 	}
 
 	@RequestMapping(method = {GET, HEAD}, value = "/{docId}")

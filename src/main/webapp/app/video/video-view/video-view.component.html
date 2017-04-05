@@ -1,9 +1,13 @@
 <div class="card">
-  <div class="card-header card-primary">Video id: {{videoToView}}</div>
-  <div class="card-block center-block">
-    <video *ngIf="videoFound" id="videTest" controls>
-      <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
-      Video not supported in your browser
-    </video>
-  </div>
+    <div class="card-header card-primary">Video id: {{videoToView}}</div>
+    <div *ngIf="videoFound" class="card-block center-block">
+        <video #videoTest controls>
+            <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
+            Video not supported in your browser
+        </video>
+    </div>
+    <div class="card-footer">
+        <button class="btn-primary" (click)="moveVideoToLocation('5.5')">Move to 5 Seconds</button>
+        <button class="btn-primary" (click)="moveVideoToLocation('10.5')">Move to 15 Seconds</button>
+    </div>
 </div>
