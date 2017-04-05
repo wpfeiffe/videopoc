@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { VideoUploadComponent } from './video-upload/video-upload.component';
-import { VideoListComponent } from './video-list/video-list.component';
+import { VideoViewComponent } from './video-view/video-view.component';
 
 export const videoRoutes: Routes = [
   {
@@ -11,8 +11,8 @@ export const videoRoutes: Routes = [
         component: VideoUploadComponent
       },
       {
-        path: 'video-list',
-        component: VideoListComponent
+        path: 'video-view/:id',
+        component: VideoViewComponent
       }
     ]
   }

@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-header card-primary">Video id: {{videoToView}}</div>
+  <div class="card-block center-block">
+    <video *ngIf="videoFound" id="videTest" controls>
+      <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
+      Video not supported in your browser
+    </video>
+  </div>
+</div>

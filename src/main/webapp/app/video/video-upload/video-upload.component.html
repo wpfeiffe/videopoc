@@ -1,32 +1,11 @@
 <div class="container">
 
-  <div class="navbar navbar-default">
-    <div class="navbar-header">
-      <a class="navbar-brand" href>Angular2 File Upload</a>
-    </div>
-  </div>
-
-  <div class="row"style="margin-bottom: 15px">
+  <div class="row" style="margin-bottom: 15px">
     <h3>Select files</h3>
   </div>
-  <div class="row"style="margin-bottom: 15px">
+  <div class="row" style="margin-bottom: 15px">
 
-
-
-      <div class="col-md-3">
-        <div ng2FileDrop
-             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-             (fileOver)="fileOverBase($event)"
-             [uploader]="uploader"
-             class="well my-drop-zone">
-          Base drop zone
-        </div>
-      </div>
-
-      <div class="col-md-9">
-      
         <input type="file" ng2FileSelect [uploader]="uploader"/>
-      </div>
   </div>
   <div class="row">
 
@@ -77,25 +56,34 @@
       </tbody>
     </table>
 
-    <div>
-      <div>
-        Queue progress:
+    <div style="margin-bottom: 15px">
+         Queue progress:
         <div class="progress" style="">
           <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
         </div>
-      </div>
-      <button type="button" class="btn btn-success btn-s"
-              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-        <span class="glyphicon glyphicon-upload"></span> Upload all
-      </button>
-      <button type="button" class="btn btn-warning btn-s"
-              (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-      </button>
-      <button type="button" class="btn btn-danger btn-s"
-              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-        <span class="glyphicon glyphicon-trash"></span> Remove all
-      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Documents Uploaded</div>
+    <div class="card-block">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let doc of videoDocuments">
+          <td>{{ doc?.documentName }}</td>
+          <td>
+            <button (click)="onView(doc?.id)" class="btn-primary">View</button>
+            <button (click)="onConvert(doc?.id)" class="btn-success">Convert</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
