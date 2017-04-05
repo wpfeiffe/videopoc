@@ -11,14 +11,13 @@ import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
+import org.poc.videopoc.config.ApplicationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 
 /**
@@ -29,11 +28,16 @@ public class VideoNormalizer
 {
     private final Logger log = LoggerFactory.getLogger(VideoNormalizer.class);
 
-    private static final String convertedPath = "/Users/wpfeiffe/Work/job/videopoc/documents/converted/";
+    private final ApplicationProperties applicationProperties;
 
-    public static void convertFile(String inputFile, String outputFile) throws Exception
+    public VideoNormalizer(ApplicationProperties applicationProperties)
     {
-        String inputMimeType = VideoNormalizer.getFileType(inputFile);
+        this.applicationProperties = applicationProperties;
+    }
+
+    public void convertFile(String inputFile, String outputFile) throws Exception
+    {
+        String inputMimeType = this.getFileType(inputFile);
 
         final Demuxer demuxer = Demuxer.make();
         final Muxer muxer = Muxer.make(outputFile, null, "mp4");
@@ -85,7 +89,7 @@ public class VideoNormalizer
         demuxer.close();
     }
 
-    public static String getFileType(String origalFilePath) throws IOException
+    public String getFileType(String origalFilePath) throws IOException
     {
         File file = new File(origalFilePath);
         TikaConfig config = TikaConfig.getDefaultConfig();
@@ -99,13 +103,13 @@ public class VideoNormalizer
         return mediaType.toString();
     }
 
-    public static String convertToMp4(String inputfile) throws Exception
+    public String convertToMp4(String inputfile) throws Exception
     {
         String convertedFileName = "ERROR";
 
 
         // get the file type
-        String mimeType = VideoNormalizer.getFileType(inputfile);
+        String mimeType = this.getFileType(inputfile);
 
         // if already mp4
         if (mimeType.equals("video/mp4"))
@@ -115,7 +119,7 @@ public class VideoNormalizer
 
         // build file name to convert to
         File infile = new File(inputfile);
-        convertedFileName = convertedPath + FilenameUtils.getBaseName(inputfile) + ".mp4";
+        convertedFileName = this.applicationProperties.getConversionDir() + FilenameUtils.getBaseName(inputfile) + ".mp4";
 
         // convert the file
         convertFile2(inputfile, convertedFileName);
@@ -123,10 +127,10 @@ public class VideoNormalizer
         return convertedFileName;
     }
 
-    public static void convertFile2(String inputFile, String outputFile) throws Exception
+    public void convertFile2(String inputFile, String outputFile) throws Exception
     {
-        FFmpeg fFmpeg = new FFmpeg("/usr/local/bin/ffmpeg");
-        FFprobe fFprobe = new FFprobe("/usr/local/bin/ffprobe");
+        FFmpeg fFmpeg = new FFmpeg(applicationProperties.getFfmpegFile());
+        FFprobe fFprobe = new FFprobe(applicationProperties.getFfmpegFile());
 
         FFmpegBuilder builder = new FFmpegBuilder()
                 .setInput(inputFile)

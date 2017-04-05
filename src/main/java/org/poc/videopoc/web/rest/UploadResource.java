@@ -1,5 +1,6 @@
 package org.poc.videopoc.web.rest;
 
+import org.poc.videopoc.config.ApplicationProperties;
 import org.poc.videopoc.service.VideoDocumentService;
 import org.poc.videopoc.service.dto.VideoDocumentDTO;
 import org.poc.videopoc.service.video.VideoNormalizer;
@@ -22,16 +23,17 @@ import java.nio.file.Paths;
 @RequestMapping(value="/upload")
 public class UploadResource
 {
-    private static String UPLOADED_FOLDER = "/Users/wpfeiffe/Work/job/videopoc/documents/upload/";
-
     private static final Logger log = LoggerFactory.getLogger(UploadResource.class);
 
-
     private final VideoDocumentService videoDocumentService;
+    private final ApplicationProperties applicationProperties;
+    private final VideoNormalizer videoNormalizer;
 
-    public UploadResource(VideoDocumentService videoDocumentService)
+    public UploadResource(VideoDocumentService videoDocumentService, ApplicationProperties applicationProperties, VideoNormalizer videoNormalizer)
     {
         this.videoDocumentService = videoDocumentService;
+        this.applicationProperties = applicationProperties;
+        this.videoNormalizer = videoNormalizer;
     }
 
     @PostMapping(value="/singlefile")
@@ -47,15 +49,15 @@ public class UploadResource
             try
             {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                Path path = Paths.get(this.applicationProperties.getUploadDir() + file.getOriginalFilename());
                 Files.write(path, bytes);
                 VideoDocumentDTO videoDocumentDTO = new VideoDocumentDTO();
 
-                videoDocumentDTO.setDocumentFilePath(VideoNormalizer.convertToMp4(path.toString()));
+                videoDocumentDTO.setDocumentFilePath(videoNormalizer.convertToMp4(path.toString()));
                 videoDocumentDTO.setDocumentName(file.getOriginalFilename());
-                videoDocumentDTO.setSourceFilePath(UPLOADED_FOLDER + file.getOriginalFilename());
+                videoDocumentDTO.setSourceFilePath(this.applicationProperties.getUploadDir() + file.getOriginalFilename());
                 videoDocumentDTO.setVideoTypeTypeCode("mpeg4");
-                VideoDocumentDTO result = videoDocumentService.save(videoDocumentDTO);
+                VideoDocumentDTO result = this.videoDocumentService.save(videoDocumentDTO);
             }
             catch (Exception e)
             {
@@ -63,12 +65,8 @@ public class UploadResource
                 return new ResponseEntity(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity(HttpStatus.OK);
-
         }
-
     }
-
-
 }
 
 

@@ -1,5 +1,6 @@
 package org.poc.videopoc.web.controller.document;
 
+import io.github.jhipster.config.JHipsterProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
@@ -24,10 +25,12 @@ public class DocumentController
 {
 
 	private final FileStorage storage;
+	private final JHipsterProperties jHipsterProperties;
 
 	@Autowired
-	public DocumentController(FileStorage storage) {
+	public DocumentController(FileStorage storage, JHipsterProperties jHipsterProperties) {
 		this.storage = storage;
+		this.jHipsterProperties = jHipsterProperties;
 	}
 
 	@RequestMapping(method = {GET, HEAD}, value = "/{docId}")

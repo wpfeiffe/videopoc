@@ -14,6 +14,7 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+
 management:
     security:
         roles: ADMIN
@@ -108,3 +109,8 @@ jhipster:
 # ===================================================================
 
 application:
+    ffmpeg-file: "/usr/local/bin/ffmpeg"
+    ffprobe-file: "/usr/local/bin/ffprobe"
+    upload-dir: "/Users/wpfeiffe/Work/job/videopoc/upload/"
+    samples-dir: "/Users/wpfeiffe/Work/job/videopoc/samples/"
+    conversion-dir: "/Users/wpfeiffe/Work/job/videopoc/documents/converted/"

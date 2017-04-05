@@ -1,5 +1,6 @@
 package org.poc.videopoc.web.controller.document;
 
+import io.github.jhipster.config.JHipsterProperties;
 import org.hibernate.service.spi.InjectService;
 import org.poc.videopoc.domain.VideoDocument;
 import org.poc.videopoc.service.VideoDocumentService;
@@ -25,6 +26,7 @@ public class FileSystemStorage implements FileStorage {
 	private static final Logger log = LoggerFactory.getLogger(FileSystemStorage.class);
 
     private final VideoDocumentService videoDocumentService;
+
 
     public FileSystemStorage(VideoDocumentService videoDocumentService)
     {
